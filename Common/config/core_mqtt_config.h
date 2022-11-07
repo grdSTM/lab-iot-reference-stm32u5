@@ -84,4 +84,6 @@
 
 #define MQTT_AGENT_MAX_EVENT_QUEUE_WAIT_TIME         ( 1 )
 
+#define MQTT_AGENT_DO_NOT_USE_CUSTOM_CONFIG
+
 #endif /* ifndef CORE_MQTT_CONFIG_H */

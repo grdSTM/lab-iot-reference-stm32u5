@@ -194,4 +194,9 @@
  */
 #define OTA_APP_VERSION_BUILD                            1
 
+
+/* For MQTT testing */
+#define INCOMING_PUBLISH_RECORD_COUNT					5
+#define OUTGOING_PUBLISH_RECORD_COUNT					5
+
 #endif /* TEST_PARAM_CONFIG_H */

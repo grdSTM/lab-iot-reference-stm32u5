@@ -28,7 +28,7 @@
 	fetchRecurseSubmodules = false
 [submodule "FreeRTOS-Libraries-Integration-Tests"]
 	path = Middleware/FreeRTOS/FreeRTOS-Libraries-Integration-Tests
-	url = https://github.com/ActoryOu/FreeRTOS-Libraries-Integration-Tests/
+	url = https://github.com/FreeRTOS/FreeRTOS-Libraries-Integration-Tests/
 	fetchRecurseSubmodules = false
 [submodule "Middleware/AWS/DeviceDefender"]
 	path = Middleware/AWS/IoTDeviceDefender

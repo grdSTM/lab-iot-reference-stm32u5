@@ -350,7 +350,13 @@ void SetupMqttTestParam( MqttTestParam_t * pTestParam )
     pTestParam->pNetworkCredentials = &xNetworkCredentials;
     pTestParam->pGetTimeMs = MqttTestGetTimeMs;
 }
-#endif /* TRANSPORT_INTERFACE_TEST_ENABLED == 1 */
+
+uint32_t FRTest_GetTimeMs( void )
+{
+	return xTaskGetTickCount();
+}
+
+#endif /* MQTT_TEST_ENABLED == 1 */
 /*-----------------------------------------------------------*/
 
 #if ( TRANSPORT_INTERFACE_TEST_ENABLED == 1 )
