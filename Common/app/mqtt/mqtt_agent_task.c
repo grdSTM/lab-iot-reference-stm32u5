@@ -597,7 +597,7 @@ static MQTTStatus_t prvHandleResubscribe( MQTTAgentContext_t * pxMqttAgentCtx,
                                  pxCtx->pxCallbacks,
                                  &( pxCtx->uxSubscriptionCount ) );
 
-    if( ( xStatus == MQTTSuccess ) && ( pxCtx->uxSubscriptionCount > 0U ) )
+    if( /* ( xStatus == MQTTSuccess ) && */ ( pxCtx->uxSubscriptionCount > 0U ) )
     {
         MQTTAgentCommandInfo_t xCommandParams =
         {
@@ -1154,11 +1154,22 @@ void vMQTTAgentTask( void * pvParameters )
                 xMQTTStatus = MQTTAgent_ResumeSession( &( pxCtx->xAgentContext ), xSessionPresent );
 
                 /* Re-subscribe to all the previously subscribed topics if there is no existing session. */
-                if( ( xMQTTStatus == MQTTSuccess ) &&
-                    ( xSessionPresent == false ) )
+                if( xMQTTStatus == MQTTSuccess )
                 {
-                    xMQTTStatus = prvHandleResubscribe( &( pxCtx->xAgentContext ),
-                                                        &( pxCtx->xSubMgrCtx ) );
+                    if( xSessionPresent == false )
+                    {
+                        xMQTTStatus = prvHandleResubscribe( &( pxCtx->xAgentContext ),
+                                                            &( pxCtx->xSubMgrCtx ) );
+                    }
+                    else
+                    {
+                        if( MUTEX_IS_OWNED( pxCtx->xSubMgrCtx.xMutex ) )
+                        {
+                            ( void ) xUnlockSubCtx( &( pxCtx->xSubMgrCtx ) );
+                        }
+
+                        LogInfo( "Session already present (no re-subscription." );
+                    }
                 }
             }
             else if( xMQTTStatus == MQTTSuccess )
